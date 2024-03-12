@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alumno</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="icon" href="/assets/img/logo.png" type="image/x-icon" />
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="navbar navbar-expand-lg UDC">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex" method="get" action="/logout">
+              <button class="btn btn-danger" type="submit">
+                Cerrar Sesion
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid mt-5 row justify-content-center">
+      <div class="col-6">
+        <div class="card text-center">
+          <div class="card-header text-white" style="background-color: #669934">
+            <h5 class="card-title"><strong><%= tipo %></strong></h5>
+          </div>
+          <div class="card-body">
+            <img
+              src="/assets/img/<%=noCuenta%>.png"
+              class=""
+              alt="Imagen alumno"
+              width="160px"
+              height="155px"
+              onerror="this.src='/assets/img/default.png'"
+            />
+
+            
+            <p class="card-text mt-3">
+              <strong>Número de cuenta:</strong> <%= noCuenta %>
+            </p>
+            <p class="card-text"><strong>Nombre:</strong> <%= nombre %></p>
+            <p class="card-text">
+              <strong>Dependencia:</strong> <%= dependencia %>
+            </p>
+            <p class="card-text"><strong>Correo:</strong> <%= correo %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-8">
+        <% 
+        let incidencias=["Falta","Bullying","Uso de celular","Robo","Vandalismo"]
+        let rand = (limt)=>{
+          return Math.floor(Math.random()*limt)+1
+        }
+
+        function fechas() {
+          const longMonths = [1, 3, 5, 7, 8, 10, 12];        
+          const month1 = Math.floor(Math.random() * 12);
+          const month2 = Math.floor(Math.random() * 12);
+        
+          let day1 = Math.floor(Math.random() * (longMonths.includes(month1 + 1) ? 31 : (month1 === 1) ? 29 : 30)) + 1;
+          let day2 = Math.floor(Math.random() * (longMonths.includes(month2 + 1) ? 31 : (month2 === 1) ? 29 : 30)) + 1;        
+          let date1 = `${day1.toString().padStart(2, '0')}/${(month1 + 1).toString().padStart(2, '0')}/2024`;
+          let date2 = `${day2.toString().padStart(2, '0')}/${(month2 + 1).toString().padStart(2, '0')}/2024`;        
+          if (date1 > date2) {
+            [date1, date2] = [date2, date1];
+          }
+          return [date1, date2];
+        }
+
+        if (tipo === 'Estudiante') { %>
+        <div class="card mt-5 mb-5">
+          <div
+            class="col-12 d-flex justify-content-between card-title UDC p-3 align-items-center"
+          >
+            <h5 class="text-white">Justificantes</h5>
+          </div>
+          <div class="card-body scrollable-table pt-0">
+            <table class="tbPersonalizada">
+              <thead>
+                <tr>
+                  <th>Fecha inicio</th>
+                  <th>Fecha Fin</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < rand(15); i++) { 
+                  let fechasRand = fechas()  
+                  
+                %>
+                <tr>
+                  <td><%= fechasRand[0] %></td>
+                  <td><%= fechasRand[1] %></td>
+                  <td>
+                    <button class="btn btn-success text-white">Ver más</button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card mt-5 mb-5">
+          <div
+            class="col-12 d-flex justify-content-between card-title UDC p-3 align-items-center"
+          >
+            <h5 class="text-white">Incidencias</h5>
+          </div>
+          <div class="card-body scrollable-table pt-0">
+            <table class="tbPersonalizada">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Motivo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < rand(15); i++) { 
+                  let fechasRand = fechas()  
+                %>
+                <tr>
+                  <td><%= fechasRand[0] %></td>
+                  <td><%= incidencias[rand(5)-1] %></td>
+                  <td><button class="btn btn-success">Ver más</button></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

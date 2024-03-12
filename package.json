@@ -1,0 +1,17 @@
+{
+  "name": "node-federado-login",
+  "version": "1.0.0",
+  "description": "App que conecta node con el IdP de UCOL",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "16.0.0",
+    "ejs": "^3.1.9",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "passport": "0.5.2",
+    "passport-saml": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
